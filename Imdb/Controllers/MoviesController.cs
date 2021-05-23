@@ -20,10 +20,44 @@ namespace Imdb.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+           string currentFilter,
+           string searchString,
+           int? pageNumber)
         {
-            var imdbContext = _context.Movie.Include(m => m.Company).Include(m => m.Language).Include(m => m.Producer);
-            return View(await imdbContext.ToListAsync());
+            ViewData["CodeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "code_desc" : "";
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var movie = from s in _context.Movie
+                        select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movie = movie.Where(s => s.MovieTitle.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "code_desc":
+                    movie = movie.OrderByDescending(s => s.MovieTitle);
+                    break;
+                default:
+                    movie = movie.OrderBy(s => s.MovieTitle);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Movie>.CreateAsync(movie.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Movies/Details/5

@@ -20,9 +20,44 @@ namespace Imdb.Controllers
         }
 
         // GET: Actors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+           string currentFilter,
+           string searchString,
+           int? pageNumber)
         {
-            return View(await _context.Actor.ToListAsync());
+            ViewData["CodeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "code_desc" : "";
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var actor = from s in _context.Actor
+                       select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                actor = actor.Where(s => s.FirstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "code_desc":
+                    actor = actor.OrderByDescending(s => s.FirstName);
+                    break;
+                default:
+                    actor = actor.OrderBy(s => s.FirstName);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Actor>.CreateAsync(actor.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Actors/Details/5

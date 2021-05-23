@@ -20,9 +20,44 @@ namespace Imdb.Controllers
         }
 
         // GET: Companies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+          string currentFilter,
+          string searchString,
+          int? pageNumber)
         {
-            return View(await _context.Company.ToListAsync());
+            ViewData["CodeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "code_desc" : "";
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var comp = from s in _context.Company
+                        select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                comp = comp.Where(s => s.CompanyName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "code_desc":
+                    comp = comp.OrderByDescending(s => s.CompanyName);
+                    break;
+                default:
+                    comp = comp.OrderBy(s => s.CompanyName);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Company>.CreateAsync(comp.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Companies/Details/5
