@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amanbay\\source\\repos\\Imdb\\Imdb\\Imdb.csproj": {}
+    "C:\\project\\Mazhikenov_Alibek_ITSE-1908R_DotNet_Project\\Imdb\\Imdb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amanbay\\source\\repos\\Imdb\\Imdb\\Imdb.csproj": {
+    "C:\\project\\Mazhikenov_Alibek_ITSE-1908R_DotNet_Project\\Imdb\\Imdb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amanbay\\source\\repos\\Imdb\\Imdb\\Imdb.csproj",
+        "projectUniqueName": "C:\\project\\Mazhikenov_Alibek_ITSE-1908R_DotNet_Project\\Imdb\\Imdb.csproj",
         "projectName": "Imdb",
-        "projectPath": "C:\\Users\\amanbay\\source\\repos\\Imdb\\Imdb\\Imdb.csproj",
-        "packagesPath": "C:\\Users\\amanbay\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amanbay\\source\\repos\\Imdb\\Imdb\\obj\\",
+        "projectPath": "C:\\project\\Mazhikenov_Alibek_ITSE-1908R_DotNet_Project\\Imdb\\Imdb.csproj",
+        "packagesPath": "C:\\Users\\Lenova\\.nuget\\packages\\",
+        "outputPath": "C:\\project\\Mazhikenov_Alibek_ITSE-1908R_DotNet_Project\\Imdb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\amanbay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lenova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,6 +30,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -47,7 +50,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
@@ -82,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.409\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
